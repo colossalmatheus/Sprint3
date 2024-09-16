@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmento_head :: conteudo-header('Lista de Unidades')}"/>
+
+<body>
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h1 class="display-4 text-primary">Lista de Unidades</h1>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" th:each="item : ${unidade}">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Unidade <span th:text="${item.numero}">#</span></h5>
+                    <p class="card-text">Número da Unidade: <span th:text="${item.numero}">A</span></p>
+                </div>
+                <div class="card-footer text-center">
+                    <a th:href="@{/atualiza_unidade/{idUnidade}(idUnidade = ${item.id})}" class="btn btn-warning me-2">Atualizar</a>
+                    <a th:href="@{/remove_unidade/{idUnidade}(idUnidade = ${item.id})}" class="btn btn-danger">Remover</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col text-center">
+            <a th:href="@{/{id}/inserir_unidade(id=${condominio.id})}" class="btn btn-success btn-lg">Cadastrar Unidade</a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col text-center">
+            <a href="/index" class="btn btn-secondary btn-lg">Retornar para lista de condomínios</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+
+</html>
