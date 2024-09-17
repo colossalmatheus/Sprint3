@@ -98,4 +98,4 @@
 
 ## Vídeo no YouTube
 
-[Assista ao vídeo no YouTube](https://www.youtube.com/watch?v=ltjadLAPTAg)
+[Assista ao vídeo](https://www.loom.com/share/166ad640ddf543bc93a5b1b2b1901063?sid=7cc8a38b-426a-4a6f-ad26-2c5a32001a32)
