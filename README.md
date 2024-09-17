@@ -17,6 +17,37 @@
 ### 2. Configuração do Projeto
 - Clone o repositório do projeto ou crie um novo projeto Spring Boot usando uma IDE como IntelliJ IDEA, Eclipse ou Spring Tool Suite.
 - Configure as dependências e propriedades do projeto, incluindo a configuração do banco de dados no arquivo `application-homologacao.yml`.
+- Crie o Dockerfile na raiz do projeto, e coloque as infomações à seguir:
+  ```bash
+  # Fase de construção
+  FROM maven:3.8.5-openjdk-17 AS build
+
+  # Define o diretório de trabalho dentro do container
+  WORKDIR /app
+
+  # Copia o arquivo pom.xml e baixa as dependências
+  COPY pom.xml .
+  RUN mvn dependency:go-offline
+
+  # Copia o código-fonte e constrói o projeto
+  COPY src ./src
+  RUN mvn clean package -DskipTests
+
+  # Fase final
+  FROM openjdk:17-jdk-slim
+
+  # Define o diretório de trabalho dentro do container
+  WORKDIR /app
+
+  # Copia o arquivo JAR gerado na fase de construção
+  COPY --from=build /app/target/EstoqueFacil-0.0.1-SNAPSHOT.jar /app/app.jar
+
+  # Expõe a porta que a aplicação usa
+  EXPOSE 80
+
+  # Define o comando para iniciar a aplicação
+  ENTRYPOINT ["java", "-jar", "app.jar"]
+  ```
 
 ### 3. Configuração do Banco de Dados
 - Certifique-se de que o banco de dados esteja configurado e em execução.
